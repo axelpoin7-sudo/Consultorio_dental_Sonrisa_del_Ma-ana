@@ -1,0 +1,67 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="BBS1aclFvPnwKBQ0Gybg">
+    <mxGraphModel dx="975" dy="536" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="hwsqxxFm0VMDqNf2VA28-9" edge="1" parent="1" source="hwsqxxFm0VMDqNf2VA28-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="hwsqxxFm0VMDqNf2VA28-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="hwsqxxFm0VMDqNf2VA28-11" edge="1" parent="1" source="hwsqxxFm0VMDqNf2VA28-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="hwsqxxFm0VMDqNf2VA28-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="hwsqxxFm0VMDqNf2VA28-13" edge="1" parent="1" source="hwsqxxFm0VMDqNf2VA28-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="hwsqxxFm0VMDqNf2VA28-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="hwsqxxFm0VMDqNf2VA28-15" edge="1" parent="1" source="hwsqxxFm0VMDqNf2VA28-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="hwsqxxFm0VMDqNf2VA28-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="hwsqxxFm0VMDqNf2VA28-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="DASHBOARD PRINCIPAL" vertex="1">
+          <mxGeometry height="30" width="110" x="320" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="hwsqxxFm0VMDqNf2VA28-4" edge="1" parent="1" source="hwsqxxFm0VMDqNf2VA28-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="hwsqxxFm0VMDqNf2VA28-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="hwsqxxFm0VMDqNf2VA28-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Login / Inicio" vertex="1">
+          <mxGeometry height="30" width="90" x="330" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="hwsqxxFm0VMDqNf2VA28-21" edge="1" parent="1" source="hwsqxxFm0VMDqNf2VA28-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="hwsqxxFm0VMDqNf2VA28-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="hwsqxxFm0VMDqNf2VA28-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="2. ODONTOGRAMA" vertex="1">
+          <mxGeometry height="30" width="125" x="223" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="hwsqxxFm0VMDqNf2VA28-20" edge="1" parent="1" source="hwsqxxFm0VMDqNf2VA28-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="hwsqxxFm0VMDqNf2VA28-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="hwsqxxFm0VMDqNf2VA28-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="1. PACIENTES" vertex="1">
+          <mxGeometry height="30" width="90" x="80" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="hwsqxxFm0VMDqNf2VA28-22" edge="1" parent="1" source="hwsqxxFm0VMDqNf2VA28-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="hwsqxxFm0VMDqNf2VA28-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="hwsqxxFm0VMDqNf2VA28-7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="3. AGENDA / CITAS" vertex="1">
+          <mxGeometry height="30" width="90" x="400" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="hwsqxxFm0VMDqNf2VA28-23" edge="1" parent="1" source="hwsqxxFm0VMDqNf2VA28-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="hwsqxxFm0VMDqNf2VA28-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="hwsqxxFm0VMDqNf2VA28-8" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="4. FINANZAS" vertex="1">
+          <mxGeometry height="30" width="90" x="510" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="hwsqxxFm0VMDqNf2VA28-16" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Listado&lt;br&gt;Filtro por CI&lt;br&gt;Formulario Nuevo Paciente" vertex="1">
+          <mxGeometry height="60" width="90" x="80" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="hwsqxxFm0VMDqNf2VA28-17" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Búsqueda de Paciente&lt;br&gt;Visor SVG (32 piezas)&lt;br&gt;Menú por Cara Dental&lt;br&gt;Guardar Snapshot" vertex="1">
+          <mxGeometry height="60" width="125" x="223" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="hwsqxxFm0VMDqNf2VA28-18" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Presupuestos&lt;br&gt;Registro de Abonos&lt;br&gt;Recibo PDF" vertex="1">
+          <mxGeometry height="60" width="90" x="510" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="hwsqxxFm0VMDqNf2VA28-19" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Calendario Semanal&lt;br&gt;Filtro Médico&lt;br&gt;Modal Nueva Cita" vertex="1">
+          <mxGeometry height="80" width="90" x="400" y="400" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
