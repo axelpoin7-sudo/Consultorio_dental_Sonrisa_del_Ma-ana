@@ -1,0 +1,44 @@
+@startuml
+autonumber
+actor Recepcionista
+participant "UI: VistaPacientes (React)" as UI
+participant "API: PacientesController" as Controller
+participant "Service: PacienteService" as Service
+participant "Repository: PacienteRepository" as Repo
+database "SQL Server / PostgreSQL" as DB
+
+Recepcionista -> UI : Ingresa datos (Nombre, Documento, Teléfono, Alergias)
+UI -> Controller : POST /api/pacientes (PacienteDTO)
+activate Controller
+
+Controller -> Service : RegistrarPaciente(dto)
+activate Service
+
+Service -> Repo : ExistePorDocumento(dto.Documento)
+activate Repo
+Repo -> DB : SELECT COUNT(1) WHERE Documento = @doc
+DB --> Repo : resultado (true / false)
+Repo --> Service : bool existe
+deactivate Repo
+
+alt #FFCDD2 Si el documento ya existe
+    Service --> Controller : InvalidOperationException("Documento ya registrado")
+    Controller --> UI : HTTP 400 Bad Request ("Documento ya registrado")
+    UI --> Recepcionista : Muestra alerta de error en formulario
+else #C8E6C9 Documento no existe
+    alt Si Alergias está vacío
+        Service -> Service : Asignar "Ninguna conocida"
+    end
+    Service -> Repo : Crear(pacienteEntity)
+    activate Repo
+    Repo -> DB : INSERT INTO Pacientes (...)
+    DB --> Repo : ID_Paciente
+    Repo --> Service : Paciente Creado
+    deactivate Repo
+    Service --> Controller : PacienteResponseDTO
+    Controller --> UI : HTTP 201 Created (PacienteResponseDTO)
+    deactivate Service
+    UI --> Recepcionista : Muestra mensaje de éxito y redirige
+end
+deactivate Controller
+@startuml

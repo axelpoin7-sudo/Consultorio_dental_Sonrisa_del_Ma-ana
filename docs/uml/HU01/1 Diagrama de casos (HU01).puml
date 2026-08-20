@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Recepcionista / Administrador" as Recepcionista
+
+rectangle "Sistema DentalFlow - Módulo Pacientes" {
+    usecase "Registrar Nuevo Paciente" as UC_RegPaciente
+    usecase "Validar Unicidad de Documento" as UC_ValDoc
+    usecase "Asignar Alergias por Defecto" as UC_Alergias
+    usecase "Mostrar Error por Documento Duplicado" as UC_ErrorDup
+}
+
+Recepcionista --> UC_RegPaciente
+UC_RegPaciente ..> UC_ValDoc : <<include>>
+UC_RegPaciente ..> UC_Alergias : <<include>>
+UC_ValDoc <.. UC_ErrorDup : <<extend>>
+@enduml
