@@ -1,0 +1,50 @@
+@startuml
+autonumber
+actor Recepcionista
+participant "UI: VistaPagos (React)" as UI
+participant "API: PagosController" as Controller
+participant "Service: PagoService" as Service
+participant "Repository: PlanTratamientoRepository" as RepoPlan
+participant "Repository: PagoRepository" as RepoPago
+database "SQL Server / PostgreSQL" as DB
+
+Recepcionista -> UI : Ingresa Monto de Abono y Método de Pago
+UI -> Controller : POST /api/pagos (RegistrarAbonoDTO)
+activate Controller
+
+Controller -> Service : ProcesarAbono(dto)
+activate Service
+
+Service -> RepoPlan : ObtenerPorId(dto.ID_PlanTratamiento)
+activate RepoPlan
+RepoPlan -> DB : SELECT * FROM Plan_Tratamiento WHERE ID = @id
+DB --> RepoPlan : PlanTratamientoEntity
+RepoPlan --> Service : PlanTratamiento
+deactivate RepoPlan
+
+alt #FFCDD2 Monto ingresado es mayor al Saldo Pendiente (Monto > SaldoPendiente)
+    Service --> Controller : InvalidOperationException("El abono excede el saldo pendiente")
+    Controller --> UI : HTTP 400 Bad Request ("Monto superior al saldo disponible")
+    UI --> Recepcionista : Muestra alerta de error en formulario
+else #C8E6C9 Monto válido (Monto <= SaldoPendiente)
+    Service -> Service : Recalcular: SaldoPendiente = SaldoPendiente - Monto
+    
+    Service -> RepoPago : InsertarAbono(pagoEntity)
+    activate RepoPago
+    RepoPago -> DB : INSERT INTO Pagos_Abonos (...)
+    DB --> RepoPago : ID_Pago
+    deactivate RepoPago
+    
+    Service -> RepoPlan : ActualizarSaldo(planEntity)
+    activate RepoPlan
+    RepoPlan -> DB : UPDATE Plan_Tratamiento SET SaldoPendiente = @nuevoSaldo
+    DB --> RepoPlan : Exito
+    deactivate RepoPlan
+    
+    Service --> Controller : PagoConfirmadoDTO
+    Controller --> UI : HTTP 201 Created (PagoConfirmadoDTO)
+    deactivate Service
+    UI --> Recepcionista : Despliega comprobante / recibo para impresión
+end
+deactivate Controller
+@enduml
