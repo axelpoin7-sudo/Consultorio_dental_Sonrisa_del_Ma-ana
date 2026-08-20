@@ -1,0 +1,51 @@
+@startuml
+autonumber
+actor Recepcionista
+participant "UI: AgendaCalendar (React)" as UI
+participant "API: CitasController" as Controller
+participant "Service: CitaService" as Service
+participant "Repository: CitaRepository" as Repo
+database "SQL Server / PostgreSQL" as DB
+
+Recepcionista -> UI : Selecciona Odontólogo, Fecha, Hora Inicio y Duración
+UI -> Controller : POST /api/citas/validar (ValidarCitaDTO)
+activate Controller
+
+Controller -> Service : VerificarDisponibilidad(idDentista, fechaHoraInicio, duracion)
+activate Service
+
+Service -> Repo : ObtenerCitasPorDentistaYFecha(idDentista, fecha)
+activate Repo
+Repo -> DB : SELECT * FROM Citas WHERE ID_Dentista = @id AND Fecha = @fecha
+DB --> Repo : List<Cita>
+Repo --> Service : Citas Existentes
+deactivate Repo
+
+Service -> Service : Evaluar traslape: (Inicio1 < Fin2) AND (Fin1 > Inicio2)
+
+alt #FFCDD2 Existe cruce de horario
+    Service --> Controller : ResultadoDisponibilidad(Disponible = false)
+    Controller --> UI : HTTP 409 Conflict ("El odontólogo ya tiene una cita asignada")
+    UI --> Recepcionista : Resalta horario en rojo y deshabilita confirmación
+else #C8E6C9 Horario completamente libre
+    Service --> Controller : ResultadoDisponibilidad(Disponible = true)
+    Controller --> UI : HTTP 200 OK ("Horario Disponible")
+    deactivate Service
+    
+    Recepcionista -> UI : Clic "Confirmar Cita"
+    UI -> Controller : POST /api/citas (CrearCitaDTO)
+    Controller -> Service : CrearCita(dto)
+    activate Service
+    Service -> Repo : Guardar(citaEntity)
+    activate Repo
+    Repo -> DB : INSERT INTO Citas (ID_Paciente, ID_Dentista, FechaHora, Estado)
+    DB --> Repo : ID_Cita
+    Repo --> Service : Cita Creada
+    deactivate Repo
+    Service --> Controller : CitaResponseDTO
+    Controller --> UI : HTTP 201 Created
+    deactivate Service
+    UI --> Recepcionista : Renderiza cita en la agenda
+end
+deactivate Controller
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+[*] --> Pendiente : Cita Creada / Agendada
+
+state Pendiente {
+    [*] --> EsperandoConfirmacion
+}
+
+Pendiente --> Confirmada : Paciente confirma asistencia
+Pendiente --> Cancelada : Paciente / Recepción cancela
+Confirmada --> EnAtencion : Paciente ingresa al consultorio
+EnAtencion --> Completada : Odontólogo finaliza procedimiento
+Confirmada --> Cancelada : Inasistencia / Cancelación tardía
+
+Completada --> [*]
+Cancelada --> [*]
+@enduml
