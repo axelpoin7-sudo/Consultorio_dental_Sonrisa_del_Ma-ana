@@ -1,0 +1,39 @@
+@startuml
+autonumber
+actor Odontologo
+participant "UI: OdontogramaCanvas (React SVG)" as UI
+participant "API: OdontogramaController" as Controller
+participant "Service: OdontogramaService" as Service
+participant "Repository: DetalleDienteRepository" as Repo
+database "SQL Server / PostgreSQL" as DB
+
+Odontologo -> UI : Clic en cara de pieza (ej. Diente 16, Cara Oclusal)
+UI -> UI : Despliega Menú Contextual (Rojo, Azul, Verde, Limpiar)
+Odontologo -> UI : Selecciona "Patología (Rojo)"
+UI -> UI : Actualiza estado local en componente SVG
+
+Odontologo -> UI : Clic "Guardar Cambios"
+UI -> Controller : POST /api/odontograma/detalle (DetalleDienteDTO)
+activate Controller
+
+Controller -> Service : RegistrarDetalleCara(dto)
+activate Service
+
+alt #C8E6C9 Datos válidos (Diente 11-48 / Cara V,M,D,O,L)
+    Service -> Repo : GuardarDetalle(detalleEntity)
+    activate Repo
+    Repo -> DB : INSERT / UPDATE Detalle_Diente
+    DB --> Repo : Exito
+    Repo --> Service : Detalle Guardado
+    deactivate Repo
+    Service --> Controller : DetalleResponseDTO
+    Controller --> UI : HTTP 200 OK (DetalleResponseDTO)
+    UI --> Odontologo : Renderiza cara pintada en Rojo y confirma
+else #FFCDD2 Datos de pieza/cara no válidos
+    Service --> Controller : ArgumentException("Pieza o cara inválida")
+    Controller --> UI : HTTP 400 Bad Request
+    deactivate Service
+    UI --> Odontologo : Muestra alerta de validación
+end
+deactivate Controller
+@enduml

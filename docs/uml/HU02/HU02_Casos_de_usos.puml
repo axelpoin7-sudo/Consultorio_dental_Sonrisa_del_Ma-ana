@@ -1,0 +1,19 @@
+@startuml
+left to right direction
+
+actor Odontologo
+
+rectangle "Sistema DentalFlow - Módulo Odontograma" {
+    usecase "Visualizar Odontograma (32/20 Dientes)" as UC_VerOdonto
+    usecase "Seleccionar Cara Dental (SVG)" as UC_SelCara
+    usecase "Asignar Condición / Color" as UC_AsignarColor
+    usecase "Limpiar Estado (Marcar Sano)" as UC_Limpiar
+    usecase "Guardar Fotografía de Odontograma" as UC_GuardarSnapshot
+}
+
+Odontologo --> UC_VerOdonto
+Odontologo --> UC_SelCara
+UC_SelCara ..> UC_AsignarColor : <<include>>
+UC_AsignarColor <.. UC_Limpiar : <<extend>>
+UC_VerOdonto ..> UC_GuardarSnapshot : <<include>>
+@enduml

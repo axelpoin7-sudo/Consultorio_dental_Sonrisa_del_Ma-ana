@@ -1,0 +1,34 @@
+@startuml
+class Odontograma {
+    + int ID
+    + int ID_Paciente
+    + DateTime FechaRegistro
+    + string Observaciones
+}
+
+class Detalle_Diente {
+    + int ID
+    + int ID_Odontograma
+    + int NumDiente
+    + string Cara
+    + int EstadoID
+    + ValidarCara(): bool
+}
+
+enum EstadoCara {
+    PATOLOGIA_ROJO = 1
+    TRATAMIENTO_AZUL = 2
+    PLANIFICADO_VERDE = 3
+    SANO_TRANSPARENTE = 0
+}
+
+class OdontogramaController {
+    - IOdontogramaService _service
+    + GuardarDetalle(DetalleDienteDTO dto): IActionResult
+    + ObtenerPorPaciente(int idPaciente): IActionResult
+}
+
+Odontograma "1" -- "0..*" Detalle_Diente : contiene
+Detalle_Diente --> EstadoCara : utiliza
+OdontogramaController --> IOdontogramaService
+@enduml
