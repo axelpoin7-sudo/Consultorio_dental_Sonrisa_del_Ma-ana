@@ -1,0 +1,34 @@
+@startuml
+class Cita {
+    + int ID
+    + int ID_Paciente
+    + int ID_Dentista
+    + DateTime FechaHora
+    + int DuracionMinutos
+    + EstadoCita Estado
+    + EsValida(): bool
+}
+
+enum EstadoCita {
+    PENDIENTE
+    CONFIRMADA
+    EN_ATENCION
+    COMPLETADA
+    CANCELADA
+}
+
+class CitasController {
+    - ICitaService _citaService
+    + ValidarDisponibilidad(ValidarCitaDTO dto): IActionResult
+    + AgendarCita(CrearCitaDTO dto): IActionResult
+    + CambiarEstado(int id, EstadoCita nuevoEstado): IActionResult
+}
+
+interface ICitaService {
+    + ValidarDisponibilidad(int idDentista, DateTime inicio, int duracion): bool
+    + Crearcita(CrearCitaDTO dto): CitaResponseDTO
+}
+
+Cita --> EstadoCita
+CitasController --> ICitaService
+@enduml

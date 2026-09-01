@@ -1,0 +1,36 @@
+@startuml
+class Plan_Tratamiento {
+    + int ID
+    + int ID_Paciente
+    + decimal CostoTotal
+    + decimal SaldoPendiente
+    + DescontarSaldo(decimal monto): void
+}
+
+class Pagos_Abonos {
+    + int ID
+    + int ID_PlanTratamiento
+    + decimal Monto
+    + DateTime Fecha
+    + MetodoPago Metodo
+}
+
+enum MetodoPago {
+    EFECTIVO
+    TARJETA
+    TRANSFERENCIA_QR
+}
+
+class PagosController {
+    - IPagoService _pagoService
+    + RegistrarAbono(RegistrarAbonoDTO dto): IActionResult
+}
+
+interface IPagoService {
+    + ProcesarAbono(RegistrarAbonoDTO dto): PagoConfirmadoDTO
+}
+
+Plan_Tratamiento "1" -- "0..*" Pagos_Abonos : registra
+Pagos_Abonos --> MetodoPago
+PagosController --> IPagoService
+@enduml

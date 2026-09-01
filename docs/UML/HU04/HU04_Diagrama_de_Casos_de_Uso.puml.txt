@@ -1,0 +1,17 @@
+@startuml
+left to right direction
+
+actor Recepcionista
+
+rectangle "Sistema DentalFlow - Módulo Financiero" {
+    usecase "Consultar Plan de Tratamiento" as UC_VerPlan
+    usecase "Registrar Abono / Pago Parcial" as UC_RegAbono
+    usecase "Validar Monto vs Saldo Pendiente" as UC_ValMonto
+    usecase "Emitir Recibo de Pago" as UC_EmitirRecibo
+}
+
+Recepcionista --> UC_VerPlan
+Recepcionista --> UC_RegAbono
+UC_RegAbono ..> UC_ValMonto : <<include>>
+UC_RegAbono ..> UC_EmitirRecibo : <<include>>
+@enduml

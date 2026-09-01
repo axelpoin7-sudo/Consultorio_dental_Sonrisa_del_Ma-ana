@@ -1,0 +1,44 @@
+@startuml
+class Paciente {
+    + int ID
+    + string Nombre
+    + string Documento
+    + string Telefono
+    + string Alergias
+    + DateTime FechaRegistro
+    + ValidarDatos(): bool
+}
+
+class PacienteDTO {
+    + string Nombre
+    + string Documento
+    + string Telefono
+    + string Alergias
+}
+
+class PacientesController {
+    - IPacienteService _pacienteService
+    + CrearPaciente(PacienteDTO dto): IActionResult
+    + ObtenerPorDocumento(string doc): IActionResult
+}
+
+interface IPacienteService {
+    + RegistrarPaciente(PacienteDTO dto): PacienteResponseDTO
+    + ExisteDocumento(string doc): bool
+}
+
+class PacienteService implements IPacienteService {
+    - IPacienteRepository _repository
+    + RegistrarPaciente(PacienteDTO dto): PacienteResponseDTO
+    + ExisteDocumento(string doc): bool
+}
+
+interface IPacienteRepository {
+    + Insertar(Paciente p): Paciente
+    + BuscarPorDocumento(string doc): Paciente
+}
+
+PacientesController --> IPacienteService
+PacienteService --> IPacienteRepository
+PacienteRepository ..> Paciente : manipula
+@enduml
